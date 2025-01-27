@@ -7,7 +7,7 @@ export const setBaseLayer = (map: Map
   
   L.tileLayer(titleLayer, {
   maxZoom: 12,
-  minZoom: 5,
+  minZoom: 6,
   attribution: "©taitran.dev",
   ...options
 }).addTo(map);

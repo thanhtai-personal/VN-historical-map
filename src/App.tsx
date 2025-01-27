@@ -1,39 +1,51 @@
-import React, { useEffect } from "react";
-import L from "leaflet";
+import React, { useEffect, useRef, useState } from "react";
+import L, { Map } from "leaflet";
 import "leaflet/dist/leaflet.css";
-import geojsonData from "./assets/data/vietnam_history.json";
+import "./App.css"
+import { useFeatureData2025 } from "./hooks/useFeatureData2025";
+import { fixedViewMap } from "./utils/fixedViewMap";
+import { setBaseLayer } from "./utils/setBaseLayerMap";
+import { setFeatureData } from "./utils/setFeatureData";
 
-const VietnamHistoryMap: React.FC = () => {
+const MapView: React.FC = () => {
+  const mapRef = useRef<Map>();
+  const [currentMap, setMap] = useState<Map | null>(null);
+  const [{
+    geojsonData
+  }, {
+    onEachFeature,
+    setStyle
+  }] = useFeatureData2025(mapRef.current);
+
   useEffect(() => {
-    // Khởi tạo bản đồ
-    const map = L.map("map").setView([16.047079, 108.206230], 6);
+    // Initialize the map
+    const map = L.map("map").setView([16.047079, 108.20623], 9);
 
-    // Thêm layer chỉ hiển thị khu vực Việt Nam
-    L.tileLayer("https://a.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png", {
-      maxZoom: 19,
-      attribution: "© OpenStreetMap contributors",
-    }).addTo(map);
+    // Add base tile layer
+    setBaseLayer(map);
 
-    // Thêm GeoJSON hiển thị bản đồ lịch sử
-    const historyLayer = L.geoJSON(geojsonData as any, {
-      style: (feature: any) => ({
-        color: feature.properties.color || "#3388ff",
-        weight: 2,
-      }),
-      onEachFeature: (feature, layer) => {
-        const { name, period } = feature.properties;
-        layer.bindPopup(`<b>${name}</b><br>Thời kỳ: ${period}`);
-      },
-    });
+    // Fixed view
+    fixedViewMap(map)
 
-    historyLayer.addTo(map);
+
+    mapRef.current = map;
+    setMap(map)
 
     return () => {
       map.remove();
     };
   }, []);
 
+  useEffect(() => {
+    if (currentMap) {
+      setFeatureData(currentMap, geojsonData, {
+        onEachFeature,
+        setStyle
+      })
+    }
+  }, [currentMap])
+
   return <div id="map" style={{ height: "100vh", width: "100vw" }}></div>;
 };
 
-export default VietnamHistoryMap;
+export default MapView;

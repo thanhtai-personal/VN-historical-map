@@ -6,12 +6,7 @@ import path from "path";
 export default defineConfig({
   resolve: {
     alias: {
-      '@/': path.resolve(__dirname, 'src/'),
-    },
-  },
-  build: {
-    rollupOptions: {
-      external: [/\.json$/], // explicitly externalize JSON files
+      '@': path.resolve(__dirname, 'src'),
     },
   },
   plugins: [react()],

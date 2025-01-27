@@ -1,14 +1,14 @@
 
 import { useMemo } from "react";
 import L, { Map } from "leaflet";
-import geojsonData1 from "../assets/data/vietnam-2025-part-1.json";
-import geojsonData2 from "../assets/data/vietnam-2025-part-2.json";
-import geojsonData3 from "../assets/data/vietnam-2025-part-3.json";
-import geojsonData4 from "../assets/data/vietnam-2025-part-4.json";
-import geojsonData5 from "../assets/data/vietnam-2025-part-5.json";
-import geojsonData6 from "../assets/data/vietnam-2025-part-6.json";
+import geojsonData1 from "@/assets/data/vietnam-2025-part-1.json";
+import geojsonData2 from "@/assets/data/vietnam-2025-part-2.json";
+import geojsonData3 from "@/assets/data/vietnam-2025-part-3.json";
+import geojsonData4 from "@/assets/data/vietnam-2025-part-4.json";
+import geojsonData5 from "@/assets/data/vietnam-2025-part-5.json";
+import geojsonData6 from "@/assets/data/vietnam-2025-part-6.json";
 
-import districtData from "../assets/data/diaphanhuyen.json";
+import districtData from "@/assets/data/diaphanhuyen.json";
 
 const provinceData = geojsonData1;
 provinceData.features = [

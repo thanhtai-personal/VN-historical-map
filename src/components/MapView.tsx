@@ -2,10 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import L, { Map } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "./App.css"
-import { useFeatureData2025 } from "./hooks/logics/useFeatureData2025";
-import { fixedViewMap } from "./utils/fixedViewMap";
-import { setBaseLayer } from "./utils/setBaseLayerMap";
-import { setFeatureData } from "./utils/setFeatureData";
+import { useFeatureData2025 } from "@/hooks/logics/useFeatureData2025";
+import { fixedViewMap } from "@/utils/fixedViewMap";
+import { setBaseLayer } from "@/utils/setBaseLayerMap";
+import { setFeatureData } from "@/utils/setFeatureData";
 
 const MapView: React.FC = () => {
   const mapRef = useRef<Map>();

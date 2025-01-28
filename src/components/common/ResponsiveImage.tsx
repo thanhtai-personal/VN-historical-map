@@ -1,7 +1,7 @@
 
 type Props = {
-  src: string;
-  alt: string;
+  src?: string;
+  alt?: string;
   srcSet?: string;
   style?: React.CSSProperties;
   classes?: {
